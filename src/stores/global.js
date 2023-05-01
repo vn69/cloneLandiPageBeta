@@ -37,16 +37,15 @@ export const useGlobalStore = defineStore('global', () => {
   // END INIT
 
   const saveData = () => {
-    ElMessage({
-      message: 'Save data successfully!',
-      type: 'success'
-    })
-    return
     const dataSave = {
       listItem: data.listItem,
       container: data.container
     }
     localStorage.setItem('web-data', JSON.stringify(dataSave))
+    ElMessage({
+      message: 'Save data successfully!',
+      type: 'success'
+    })
   }
 
   const getStyleContainer = () => {
