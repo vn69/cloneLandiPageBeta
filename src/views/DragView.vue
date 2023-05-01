@@ -1,7 +1,10 @@
 <template>
-  <h1>This is an drag page</h1>
+  <b>Wellcome To Clone LandingPage Beta =))</b>
+  <div>Click to button "Show Demo" to see magic!</div>
   <div class="menu">
-    <el-button @click="this.$router.push('/demo')">Show Demo</el-button>
+    <RouterLink to="/demo">
+      <el-button>Show Demo</el-button>
+    </RouterLink>
     <br />
     <el-button @click="global.saveData">Save</el-button>
     <br />
@@ -137,7 +140,7 @@ const openEditor = (item) => {
 }
 
 const clickToItem = (item) => {
-  global.data.listItem.forEach(item => {
+  global.data.listItem.forEach((item) => {
     item.active = false
   })
   item.active = true

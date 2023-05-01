@@ -5,7 +5,7 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <header>
     <nav>
-      <RouterLink to="/drag">Drag</RouterLink> ||
+      <RouterLink to="/">Drag</RouterLink> ||
     </nav>
   </header>
 

@@ -7,7 +7,7 @@ export const rawData = {
       type: 'text',
       boxItem: {
         x: 60,
-        y: 117,
+        y: 214,
         h: 134,
         w: 1080,
         active: false
@@ -20,8 +20,8 @@ export const rawData = {
         '<div class="render-item" data-draggable="true">\n<div class="element-main element-type-text-single component-render" data-v-5cee62ab="">\n<div class="ql-editor" data-v-5cee62ab="">\n<p><span style="font-size: 18pt;"><strong class="ql-font-Barlow ql-size-30px">Nguyễn Anh Đo&agrave;n</strong></span></p>\n<p>Frontend Website Developer</p>\n</div>\n</div>\n</div>',
       type: 'text',
       boxItem: {
-        x: 60,
-        y: 0,
+        x: 226,
+        y: 57,
         h: 97,
         w: 220,
         active: false
@@ -35,7 +35,7 @@ export const rawData = {
       type: 'text',
       boxItem: {
         x: 843,
-        y: 0,
+        y: 57,
         h: 108,
         w: 297,
         active: false
@@ -49,12 +49,12 @@ export const rawData = {
       type: 'text',
       boxItem: {
         x: 60,
-        y: 255,
+        y: 348,
         h: 230,
         w: 1080,
         active: false
       },
-      active: true
+      active: false
     },
     {
       id: '1682933085815',
@@ -63,7 +63,7 @@ export const rawData = {
       type: 'text',
       boxItem: {
         x: 60,
-        y: 490,
+        y: 590,
         h: 56,
         w: 125,
         active: false
@@ -77,7 +77,7 @@ export const rawData = {
       type: 'text',
       boxItem: {
         x: 60,
-        y: 550,
+        y: 634,
         h: 74,
         w: 238,
         active: false
@@ -91,7 +91,7 @@ export const rawData = {
       type: 'text',
       boxItem: {
         x: 309,
-        y: 550,
+        y: 634,
         h: 250,
         w: 833,
         active: false
@@ -105,7 +105,7 @@ export const rawData = {
       type: 'text',
       boxItem: {
         x: 60,
-        y: 824,
+        y: 900,
         h: 74,
         w: 238,
         active: false
@@ -119,13 +119,29 @@ export const rawData = {
       type: 'text',
       boxItem: {
         x: 309,
-        y: 824,
+        y: 900,
         h: 137,
         w: 833,
         active: false
       },
       active: false
+    },
+    {
+      id: '1682944869467',
+      content:
+        '<p><img src="https://avatars.githubusercontent.com/u/94807209?v=4" alt="" width="158" height="158" /></p>\n<div class="ddict_btn" style="top: 18px; left: 43.965px;"><img src="chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png" /></div>',
+      type: 'text',
+      boxItem: {
+        x: 60,
+        y: 40,
+        h: 200,
+        w: 160,
+        active: false
+      },
+      active: false
     }
   ],
-  container: { height: 1000 }
+  container: {
+    height: 1050
+  }
 }
