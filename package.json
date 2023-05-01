@@ -15,6 +15,7 @@
     "element-plus": "^2.3.4",
     "lodash": "^4.17.21",
     "pinia": "^2.0.32",
+    "undo-manager": "^1.1.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
     "vue3-draggable-resizable": "^1.6.5"

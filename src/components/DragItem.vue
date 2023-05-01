@@ -12,11 +12,11 @@
       :resizable="true"
       @activated="print('activated')"
       @deactivated="print('deactivated')"
-      @drag-start="startDrag"
+      @drag-start="startDrag(boxItem)"
       @resize-start="print('resize-start')"
       @dragging="handleDrag"
       @resizing="print('resizing')"
-      @drag-end="endDrag"
+      @drag-end="endDrag(boxItem)"
       @resize-end="print('resize-end')"
     >
       <slot></slot>
@@ -82,7 +82,7 @@ const checkPosition = (type, p, listPosition) => {
     const space = type == 'x' ? props.boxItem.w : props.boxItem.h
     const centerP = p + space / 2
     if (centerP > position - spaceAbosolute && centerP < position + spaceAbosolute) {
-      console.log('center position')
+      // console.log('center position')
       setTimeout(() => {
         props.boxItem[type] = position - space / 2
         showLine(typeLine, position)
@@ -118,7 +118,11 @@ const clearLine = (typeLine) => {
   }
 }
 
-const endDrag = (position) => {
+const endDrag = () => {
+  console.log("endDrag");
+  global.handleDragItem(props.id)
+  global.data.selectItem = null
+
   setTimeout(() => {
     clearLine('w')
     clearLine('h')
@@ -137,8 +141,10 @@ const onDrag = (position) => {
   checkPosition('y', y, global.data.listPosition)
 }
 
-const startDrag = () => {
+const startDrag = (boxItem) => {
   console.log('startDrag')
+  global.data.selectItem = _.cloneDeep(boxItem)
+
   let listW = [0]
   let listH = [0, 1200]
   let centerH = [600]

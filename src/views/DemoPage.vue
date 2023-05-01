@@ -1,6 +1,8 @@
 <template>
   <div class="view" :style="global.getStyleContainer()">
-    <div class="back" @click="this.$router.push('/')">back to editor</div>
+    <RouterLink to="/">
+      <div class="back">back to editor</div>
+    </RouterLink>
     <div v-for="item in global.data.listItem" :key="item.id">
       <ShowDragItem :item="item"></ShowDragItem>
     </div>
@@ -11,7 +13,7 @@
 import { useGlobalStore } from '../stores/global'
 const global = useGlobalStore()
 
-import ShowDragItem from '../components/ShowDragItem.vue';
+import ShowDragItem from '../components/ShowDragItem.vue'
 </script>
 
 <style scoped>

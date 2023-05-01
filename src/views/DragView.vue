@@ -8,11 +8,15 @@
     <br />
     <el-button @click="global.saveData">Save</el-button>
     <br />
-    <el-button @click="addTextItem">addText</el-button>
+    <el-button @click="global.handleAddTextItem">addText</el-button>
     <br />
-    <el-button @click="global.data.container.height += 50">+ Height</el-button>
+    <el-button @click="global.undoManager.undo" :disabled="!global.undoManager.hasUndo()">Undo</el-button>
     <br />
-    <el-button @click="global.data.container.height -= 50">- Height</el-button>
+    <el-button @click="global.undoManager.redo" :disabled="!global.undoManager.hasRedo()">Redo</el-button>
+    <br />
+    <el-button @click="global.handleAddHeight(50)">+ Height</el-button>
+    <br />
+    <el-button @click="global.handleMinusHeight(50)">- Height</el-button>
   </div>
   <div class="drag_view" :style="global.getStyleContainer()">
     <div class="container_view">
@@ -21,8 +25,8 @@
           <DragItem v-if="item.active" :id="item.id" :boxItem="item.boxItem">
             <div class="full-w-h" v-html="item.content"></div>
             <el-row class="options">
-              <el-button @click="copyItem(item)">Copy</el-button>
-              <el-button type="danger" @click="removeItem(item)">delete</el-button>
+              <el-button @click="global.handleCopyItem(item)">Copy</el-button>
+              <el-button type="danger" @click="global.handleRemoveItem(item.id)">delete</el-button>
               <el-button type="primary" @click="openEditor(item)">Edit Text</el-button>
             </el-row>
           </DragItem>
@@ -82,7 +86,6 @@
 import DragItem from '../components/DragItem.vue'
 import { useGlobalStore } from '../stores/global'
 const global = useGlobalStore()
-import _ from 'lodash'
 
 import Editor from '@tinymce/tinymce-vue'
 import Vue3DraggableResizable from 'vue3-draggable-resizable'
@@ -96,41 +99,6 @@ const showEditor = reactive({
   x: 0,
   y: 0
 })
-const itemChange = ref({})
-
-const getNewBox = () => {
-  return {
-    id: Date.now().toString(),
-    content: '<p>Text</p>',
-    type: 'text',
-    boxItem: {
-      x: 0,
-      y: 0,
-      h: 50,
-      w: 100,
-      active: false
-    }
-  }
-}
-
-const addTextItem = () => {
-  const newText = getNewBox()
-  newText.type = 'text'
-  newText.boxItem.x = 300
-  newText.boxItem.y = 20
-  global.data.listItem.push(newText)
-}
-
-const copyItem = (item) => {
-  const newItem = _.cloneDeep(item)
-  newItem.id = Date.now().toString()
-  newItem.boxItem.x += 200
-  global.data.listItem.push(newItem)
-}
-
-const removeItem = (item) => {
-  global.data.listItem = global.data.listItem.filter((e) => e.id !== item.id)
-}
 
 const openEditor = (item) => {
   showEditor.x = item.boxItem.x + 200

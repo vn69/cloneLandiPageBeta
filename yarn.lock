@@ -1958,6 +1958,11 @@ ufo@^1.1.1:
   resolved "https://registry.yarnpkg.com/ufo/-/ufo-1.1.1.tgz#e70265e7152f3aba425bd013d150b2cdf4056d7c"
   integrity sha512-MvlCc4GHrmZdAllBc0iUDowff36Q9Ndw/UzqmEKyrfSzokTd9ZCy1i+IIk5hrYKkjoYVQyNbrw7/F8XJ2rEwTg==
 
+undo-manager@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/undo-manager/-/undo-manager-1.1.0.tgz#42b26446b8b70efceb83df48a1d08b63f75d81e7"
+  integrity sha512-77cJsVZBqWA7YO16X9eczBzzrHvZS/C4usA64hNBqTr2kEMng0ql9ZuqeHW3OJflO3+gJZPRZcgUK4c3GQOfvw==
+
 universalify@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.2.0.tgz#6451760566fa857534745ab1dde952d1b1761be0"
