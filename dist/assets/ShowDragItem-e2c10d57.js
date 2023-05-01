@@ -1,4 +1,4 @@
-import{bu as l,az as s,bv as o,at as d,p as r,ad as c,af as p}from"./index-c19cbf45.js";import{_ as g}from"./_plugin-vue_export-helper-c27b6911.js";const v={listItem:[{id:"1682932595173",content:`<div class="render-item" data-draggable="true">
+import{bu as l,az as s,bv as o,at as d,p as r,ad as c,af as p}from"./index-d9439e30.js";import{_ as g}from"./_plugin-vue_export-helper-c27b6911.js";const v={listItem:[{id:"1682932595173",content:`<div class="render-item" data-draggable="true">
 <div class="element-group-main">
 <div class="min-padding">
 <div class="layout-render cvo-text-color no-padding flex-row flex-nowrap">
