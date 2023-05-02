@@ -13,11 +13,11 @@
       @activated="print('activated')"
       @deactivated="print('deactivated')"
       @drag-start="startDrag(boxItem)"
-      @resize-start="print('resize-start')"
+      @resize-start="startResize(boxItem)"
       @dragging="handleDrag"
       @resizing="print('resizing')"
       @drag-end="endDrag(boxItem)"
-      @resize-end="print('resize-end')"
+      @resize-end="endResize"
     >
       <slot></slot>
     </Vue3DraggableResizable>
@@ -118,17 +118,6 @@ const clearLine = (typeLine) => {
   }
 }
 
-const endDrag = () => {
-  console.log("endDrag");
-  global.handleDragItem(props.id)
-  global.data.selectItem = null
-
-  setTimeout(() => {
-    clearLine('w')
-    clearLine('h')
-  }, 200)
-}
-
 const handleDrag = _.throttle(function (position) {
   onDrag(position)
 }, 200)
@@ -143,6 +132,7 @@ const onDrag = (position) => {
 
 const startDrag = (boxItem) => {
   console.log('startDrag')
+  // drag undo
   global.data.selectItem = _.cloneDeep(boxItem)
 
   let listW = [0]
@@ -174,7 +164,28 @@ const startDrag = (boxItem) => {
   global.data.listPosition.centerH = centerH
   global.data.listPosition.centerW = centerW
 }
+const endDrag = () => {
+  console.log('endDrag')
+  // drag undo
+  global.handleDragItem(props.id)
+  global.data.selectItem = null
 
+  setTimeout(() => {
+    clearLine('w')
+    clearLine('h')
+  }, 200)
+}
+
+// resize
+const startResize = (boxItem) => {
+  // drag undo
+  global.data.selectItem = _.cloneDeep(boxItem)
+}
+const endResize = () => {
+  // drag undo
+  global.handleDragItem(props.id)
+  global.data.selectItem = null
+}
 // options
 </script>
 

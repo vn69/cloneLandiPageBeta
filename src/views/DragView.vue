@@ -10,13 +10,13 @@
     <br />
     <el-button @click="global.handleAddTextItem">addText</el-button>
     <br />
-    <el-button @click="global.undoManager.undo" :disabled="!global.undoManager.hasUndo()">Undo</el-button>
-    <br />
-    <el-button @click="global.undoManager.redo" :disabled="!global.undoManager.hasRedo()">Redo</el-button>
-    <br />
     <el-button @click="global.handleAddHeight(50)">+ Height</el-button>
     <br />
     <el-button @click="global.handleMinusHeight(50)">- Height</el-button>
+    <br />
+    <el-button v-show="!global.data.refresh" @click="undoManager.undo()" :disabled="!undoManager.hasUndo()">Undo</el-button>
+    <br />
+    <el-button v-show="!global.data.refresh" @click="undoManager.redo()" :disabled="!undoManager.hasRedo()">Redo</el-button>
   </div>
   <div class="drag_view" :style="global.getStyleContainer()">
     <div class="container_view">
@@ -92,7 +92,9 @@ import Vue3DraggableResizable from 'vue3-draggable-resizable'
 import 'vue3-draggable-resizable/dist/Vue3DraggableResizable.css'
 import ShowDragItem from '../components/ShowDragItem.vue'
 
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
+
+import undoManager from '../stores/undoManager'
 const showEditor = reactive({
   show: false,
   itemSelect: {},
@@ -113,6 +115,14 @@ const clickToItem = (item) => {
   })
   item.active = true
 }
+// watch refresh becasue the undo redo manager do not change when add action
+watch(() => global.data.refresh, () => {
+  if(global.data.refresh === true)
+  setTimeout(() => {
+    global.data.refresh = false
+  }, 0);
+})
+
 </script>
 
 <style scoped>
@@ -177,6 +187,7 @@ const clickToItem = (item) => {
   position: absolute;
   top: -40px;
   left: 0;
+  z-index: 10;
 }
 </style>
 

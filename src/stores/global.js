@@ -1,13 +1,11 @@
-import { reactive } from 'vue'
+import { computed, nextTick, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import { rawData } from './rawData'
 import { ElMessage } from 'element-plus'
 import _ from 'lodash'
-
-import UndoManager from 'undo-manager'
+import undoManager from './undoManager'
 
 export const useGlobalStore = defineStore('global', () => {
-  const undoManager = new UndoManager()
   const data = reactive({
     lineW: {
       show: false,
@@ -28,7 +26,8 @@ export const useGlobalStore = defineStore('global', () => {
       height: 1000
     },
     // drag undo redo
-    selectItem: null
+    selectItem: null,
+    refresh: false
   })
   // INIT
   const localData = localStorage.getItem('web-data')
@@ -147,24 +146,23 @@ export const useGlobalStore = defineStore('global', () => {
     data.container.height -= number
   }
 
-  const handleDragItem = (id) => {
-    const newItem = data.listItem.find(e => e.id === id)
+  const handleDragItem = async (id) => {
+    const newItem = data.listItem.find((e) => e.id === id)
     const backupBox = _.cloneDeep(data.selectItem)
     const newBox = _.cloneDeep(newItem.boxItem)
-    console.log({backupBox, newBox});
     if (backupBox) {
       undoManager.add({
         undo: () => (newItem.boxItem = { ...backupBox }),
         redo: () => (newItem.boxItem = { ...newBox })
       })
     }
+    data.refresh = true
   }
 
   return {
     data,
     getStyleContainer,
     saveData,
-    undoManager,
     handleAddTextItem,
     handleRemoveItem,
     handleCopyItem,
