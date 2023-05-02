@@ -1,47 +1,61 @@
 <template>
-  <b>Wellcome To Clone LandingPage Beta =))</b>
-  <div>Click to button "Show Demo" to see magic!</div>
-  <div class="menu">
-    <RouterLink to="/demo">
-      <el-button>Show Demo</el-button>
-    </RouterLink>
-    <br />
-    <el-button @click="global.saveData">Save</el-button>
-    <br />
-    <el-button @click="global.handleAddTextItem">addText</el-button>
-    <br />
-    <el-button @click="global.handleAddHeight(50)">+ Height</el-button>
-    <br />
-    <el-button @click="global.handleMinusHeight(50)">- Height</el-button>
-    <br />
-    <el-button v-show="!global.data.refresh" @click="undoManager.undo()" :disabled="!undoManager.hasUndo()">Undo</el-button>
-    <br />
-    <el-button v-show="!global.data.refresh" @click="undoManager.redo()" :disabled="!undoManager.hasRedo()">Redo</el-button>
-  </div>
-  <div class="drag_view" :style="global.getStyleContainer()">
-    <div class="container_view">
-      <div class="full">
-        <div class="p-options" v-for="item in global.data.listItem" :key="item.id">
-          <DragItem v-if="item.active" :id="item.id" :boxItem="item.boxItem">
-            <div class="full-w-h" v-html="item.content"></div>
-            <el-row class="options">
-              <el-button @click="global.handleCopyItem(item)">Copy</el-button>
-              <el-button type="danger" @click="global.handleRemoveItem(item.id)">delete</el-button>
-              <el-button type="primary" @click="openEditor(item)">Edit Text</el-button>
-            </el-row>
-          </DragItem>
-          <ShowDragItem v-else :item="item" @click="clickToItem(item)" isDev></ShowDragItem>
+  <div @keydown.ctrl="onKeydown" tabindex="0">
+    <b>Wellcome To Clone LandingPage Beta =))</b>
+    <div>Click to button "Show Demo" to see magic!</div>
+    <div class="menu">
+      <RouterLink to="/demo">
+        <el-button>Show Demo</el-button>
+      </RouterLink>
+      <br />
+      <el-button @click="global.saveData">Save</el-button>
+      <br />
+      <el-button @click="global.handleAddTextItem">addText</el-button>
+      <br />
+      <el-button @click="global.handleAddHeight(50)">+ Height</el-button>
+      <br />
+      <el-button @click="global.handleMinusHeight(50)">- Height</el-button>
+      <br />
+      <el-button
+        v-show="!global.data.refresh"
+        @click="undoManager.undo()"
+        :disabled="!undoManager.hasUndo()"
+        >Undo</el-button
+      >
+      <br />
+      <el-button
+        v-show="!global.data.refresh"
+        @click="undoManager.redo()"
+        :disabled="!undoManager.hasRedo()"
+        >Redo</el-button
+      >
+    </div>
+    <div class="drag_view" :style="global.getStyleContainer()">
+      <div class="container_view">
+        <div class="full">
+          <div class="p-options" v-for="item in global.data.listItem" :key="item.id">
+            <DragItem v-if="item.active" :id="item.id" :boxItem="item.boxItem">
+              <div class="full-w-h" v-html="item.content"></div>
+              <el-row class="options">
+                <el-button @click="global.handleCopyItem(item)">Copy</el-button>
+                <el-button type="danger" @click="global.handleRemoveItem(item.id)"
+                  >delete</el-button
+                >
+                <el-button type="primary" @click="openEditor(item)">Edit Text</el-button>
+              </el-row>
+            </DragItem>
+            <ShowDragItem v-else :item="item" @click="clickToItem(item)" isDev></ShowDragItem>
+          </div>
+          <div
+            class="line-h"
+            v-show="global.data.lineH.show"
+            :style="{ left: `${global.data.lineH.position}px` }"
+          ></div>
+          <div
+            class="line-w"
+            v-show="global.data.lineW.show"
+            :style="{ top: `${global.data.lineW.position}px` }"
+          ></div>
         </div>
-        <div
-          class="line-h"
-          v-show="global.data.lineH.show"
-          :style="{ left: `${global.data.lineH.position}px` }"
-        ></div>
-        <div
-          class="line-w"
-          v-show="global.data.lineW.show"
-          :style="{ top: `${global.data.lineW.position}px` }"
-        ></div>
       </div>
     </div>
   </div>
@@ -116,13 +130,27 @@ const clickToItem = (item) => {
   item.active = true
 }
 // watch refresh becasue the undo redo manager do not change when add action
-watch(() => global.data.refresh, () => {
-  if(global.data.refresh === true)
-  setTimeout(() => {
-    global.data.refresh = false
-  }, 0);
-})
+watch(
+  () => global.data.refresh,
+  () => {
+    if (global.data.refresh === true)
+      setTimeout(() => {
+        global.data.refresh = false
+      }, 0)
+  }
+)
 
+const onKeydown = (e) => {
+  console.log(e)
+  if (e.key == 'z') {
+    undoManager.undo()
+    return
+  }
+  if (e.key == 'y') {
+    undoManager.redo()
+    return
+  }
+}
 </script>
 
 <style scoped>

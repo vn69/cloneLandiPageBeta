@@ -64,6 +64,7 @@ export const useGlobalStore = defineStore('global', () => {
       id,
       content: '<p>Text</p>',
       type: 'text',
+      active: false,
       boxItem: {
         x: 0,
         y: 0,
@@ -93,6 +94,7 @@ export const useGlobalStore = defineStore('global', () => {
   const handleRemoveItem = (id) => {
     const backupIndex = data.listItem.findIndex((e) => e.id === id)
     const backup = data.listItem.find((e) => e.id === id)
+    backup.active = false
     if (backup.id) {
       removeItem(id)
       undoManager.add({
